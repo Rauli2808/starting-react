@@ -16,7 +16,6 @@ function App() {
 	const [filter, filterSet] = useState("");
 
 	useEffect(() => {
-		// fetch('http://localhost:3000/starting-react/data.json')
 		fetch('https://rauli2808.github.io/starting-react/data.json')
 			.then(resp => resp.json())
 			.then(data => directorySet(data.splice(0, 25)));
