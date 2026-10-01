@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import DirectoryContext from "../context/DirectoryContext";
 
 const Filter = () => {
-    const { filter, filterSet } = useContext(DirectoryContext);    
+    const { state: {filter}, dispatch } = useContext(DirectoryContext);    
 
     return (
-        <input value={filter} placeholder='Start typing...' onChange={(event) => filterSet(event.target.value)}></input>
+        <input value={filter} placeholder='Start typing...' onChange={(event) => dispatch({type: 'SET_FILTER', payload: event.target.value})}></input>
     )
 }
 

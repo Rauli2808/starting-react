@@ -1,39 +1,30 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useEffect, useReducer } from 'react';
 import Filter from './components/Filter';
 import Directory from './components/Directory';
 import SelectedContact from './components/SelectedContact';
 import DirectoryContext from './context/DirectoryContext';
+import {DirectoryReducer} from './reducer/DirectoryReducer';
 
 const App = () => {
-	const [directory, directorySet] = useState([]);
-	const [filter, filterSet] = useState("");
-	const [selected, selectedSet] = useState(null);
+	const [state, dispatch] = useReducer(DirectoryReducer, {
+		directory: [],
+		filter: "",
+		selected: null
+	});
 
 	useEffect(() => {
-		fetch('https://rauli2808.github.io/starting-react/data.json')
+		fetch('/starting-react/data.json')
 			.then(resp => resp.json())
-			.then(data => directorySet(data.splice(0, 20)));
+			.then(data => dispatch({type: 'SET_DIRECTORY', payload: data.splice(0, 20)}));
 	}, []);
-
-	const clicked = (row) => {
-		if(row)
-			selectedSet(row);
-		else
-			selectedSet(null);
-	}
 
 	return (
 		<div>
 			<DirectoryContext.Provider
 				value={{
-					filter,
-					filterSet,
-					directory,
-					directorySet,
-					selected,
-					selectedSet,
-					clicked
+					state,
+					dispatch,
 				}}
 			>
 				<h1 className="center">Directory</h1>

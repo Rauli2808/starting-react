@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import DirectoryContext from "../context/DirectoryContext";
 
 const SelectedContact = () => {
-    const { selected } = useContext(DirectoryContext);
+    const { state: {selected} } = useContext(DirectoryContext);
     
     return (
        selected &&
