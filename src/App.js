@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Filter from './components/Filter';
 import Directory from './components/Directory';
 import SelectedContact from './components/SelectedContact';
+import DirectoryContext from './context/DirectoryContext';
 
 const App = () => {
 	const [directory, directorySet] = useState([]);
@@ -24,16 +25,24 @@ const App = () => {
 
 	return (
 		<div>
-			<h1 className="center">Directory</h1>
-			<Filter filter={filter} filterSet={filterSet}></Filter>
-			<div style={{display:'flex'}}>
-				<Directory
-					directory={directory}
-					clicked={clicked}
-					filter={filter}
-				></Directory>
-				<SelectedContact selected={selected}></SelectedContact>
-			</div>
+			<DirectoryContext.Provider
+				value={{
+					filter,
+					filterSet,
+					directory,
+					directorySet,
+					selected,
+					selectedSet,
+					clicked
+				}}
+			>
+				<h1 className="center">Directory</h1>
+				<Filter />
+				<div style={{display:'flex'}}>
+					<Directory />
+					<SelectedContact />
+				</div>
+			</DirectoryContext.Provider>
 		</div>
 	);
 }

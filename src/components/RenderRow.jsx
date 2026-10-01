@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from '@mui/material/Button';
+import DirectoryContext from "../context/DirectoryContext";
 
-const RenderRow = ({ item, clickHandler }) => {
+const RenderRow = ({ item }) => {
+    const { clicked } = useContext(DirectoryContext);
+
     return (
         <tr key={item.id} className="rows">
             <td>{item.name}</td>
             <td>{item.language}</td>
             <td>
                 <Button 
-                    onClick={() => clickHandler(item)}
+                    onClick={() => clicked(item)}
                     variant='contained'
                 >More Information</Button>
             </td>

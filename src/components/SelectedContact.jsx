@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import DirectoryContext from "../context/DirectoryContext";
 
-const SelectedContact = ({ selected }) => {
+const SelectedContact = () => {
+    const { selected } = useContext(DirectoryContext);
+    
     return (
        selected &&
         <>

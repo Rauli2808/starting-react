@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../App.css";
 import RenderRow from "./RenderRow";
+import DirectoryContext from "../context/DirectoryContext";
 
-const Directory = ({ directory, clicked, filter }) => {
+const Directory = () => {
+    const { directory, clicked, filter } = useContext(DirectoryContext);
+
     return (
         <table width="80%">
             <thead>
@@ -13,7 +16,7 @@ const Directory = ({ directory, clicked, filter }) => {
             </thead>
             <tbody>
                 {directory.filter((row) => row.name.toLowerCase().includes(filter.toLowerCase()))
-                .map(row => <RenderRow item={row} clickHandler={clicked}></RenderRow>)}
+                .map(row => <RenderRow item={row}></RenderRow>)}
             </tbody>
         </table>
     );
