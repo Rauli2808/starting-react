@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
 import "../App.css";
 import RenderRow from "./RenderRow";
-import DirectoryContext from "../context/DirectoryContext";
+import { useSelector, useDispatch } from "react-redux";
 
 const Directory = () => {
-    const { state: {directory, filter}, dispatch } = useContext(DirectoryContext);
+    const directory = useSelector(state => state.directory);
+    const filter = useSelector(state => state.filter);
+    const dispatch = useDispatch();
 
     const clicked = (row) => {
 		if(row)
