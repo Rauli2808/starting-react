@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import DirectoryContext from "../context/DirectoryContext";
+import { useSelector, useDispatch } from "react-redux";
 
 const Filter = () => {
-    const { state: {filter}, dispatch } = useContext(DirectoryContext);    
+    const filter = useSelector(state => state.filter);
+    const dispatch = useDispatch();
 
     return (
-        <input value={filter} placeholder='Start typing...' onChange={(event) => dispatch({type: 'SET_FILTER', payload: event.target.value})}></input>
+        <input value={filter} onChange={(event) => dispatch({type: 'SET_FILTER', payload: event.target.value})}></input>
     )
 }
 

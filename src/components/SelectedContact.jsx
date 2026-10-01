@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
-import DirectoryContext from "../context/DirectoryContext";
+import { useSelector } from "react-redux";
 
 const SelectedContact = () => {
-    const { state: {selected} } = useContext(DirectoryContext);
+    const selected = useSelector(state => state.selected);
     
     return (
        selected &&

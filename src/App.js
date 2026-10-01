@@ -1,17 +1,17 @@
 import './App.css';
-import { useEffect, useReducer } from 'react';
+import { useEffect } from 'react';
 import Filter from './components/Filter';
 import Directory from './components/Directory';
 import SelectedContact from './components/SelectedContact';
-import DirectoryContext from './context/DirectoryContext';
-import {DirectoryReducer} from './reducer/DirectoryReducer';
+import { DirectoryReducer } from './reducer/DirectoryReducer';
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider, useSelector, useDispatch } from 'react-redux';
+
+const store = configureStore({reducer: DirectoryReducer});
 
 const App = () => {
-	const [state, dispatch] = useReducer(DirectoryReducer, {
-		directory: [],
-		filter: "",
-		selected: null
-	});
+	const directory = useSelector(state => state.directory);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		fetch('/starting-react/data.json')
@@ -19,23 +19,20 @@ const App = () => {
 			.then(data => dispatch({type: 'SET_DIRECTORY', payload: data.splice(0, 20)}));
 	}, []);
 
+	if(!directory.length) {
+		return <div>Loading Data...</div>
+	}
+
 	return (
 		<div>
-			<DirectoryContext.Provider
-				value={{
-					state,
-					dispatch,
-				}}
-			>
-				<h1 className="center">Directory</h1>
-				<Filter />
-				<div style={{display:'flex'}}>
-					<Directory />
-					<SelectedContact />
-				</div>
-			</DirectoryContext.Provider>
+			<h1 className="center">Directory</h1>
+			<Filter />
+			<div style={{display:'flex'}}>
+				<Directory />
+				<SelectedContact />
+			</div>
 		</div>
 	);
 }
 
-export default App;
+export default () => <Provider store={store}><App /></Provider>;

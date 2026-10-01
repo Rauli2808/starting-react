@@ -1,4 +1,8 @@
-export const DirectoryReducer = (state, action) => {
+export const DirectoryReducer = (state = {
+    directory: [],
+    filter: "",
+    selected: null
+}, action) => {
     switch(action.type) {
         case 'SET_DIRECTORY': 
             return {

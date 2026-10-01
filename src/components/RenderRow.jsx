@@ -1,6 +1,4 @@
-import React, { useContext } from "react";
 import Button from '@mui/material/Button';
-import DirectoryContext from "../context/DirectoryContext";
 
 const RenderRow = ({ item, clicked }) => {
     return (
