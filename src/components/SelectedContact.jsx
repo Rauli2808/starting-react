@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
+import useStore from "../store";
 
 const SelectedContact = () => {
-    const selected = useSelector(state => state.selected);
+    const selected = useStore(state => state.selected);
     
     return (
        selected &&

@@ -1,15 +1,15 @@
 import "../App.css";
 import RenderRow from "./RenderRow";
-import { useSelector, useDispatch } from "react-redux";
+import useStore from "../store";
 
 const Directory = () => {
-    const directory = useSelector(state => state.directory);
-    const filter = useSelector(state => state.filter);
-    const dispatch = useDispatch();
+    const directory = useStore(state => state.directory);
+    const filter = useStore(state => state.filter);
+    const setSelected = useStore(state => state.setSelected);
 
     const clicked = (row) => {
 		if(row)
-			dispatch({type: 'SET_SELECTED', payload: row});
+			setSelected(row);
 	}
 
     return (

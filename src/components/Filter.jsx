@@ -1,11 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
+import useStore from "../store";
 
 const Filter = () => {
-    const filter = useSelector(state => state.filter);
-    const dispatch = useDispatch();
+    const filter = useStore(state => state.filter);
+    const setFilter = useStore(state => state.setFilter);
 
     return (
-        <input value={filter} onChange={(event) => dispatch({type: 'SET_FILTER', payload: event.target.value})}></input>
+        <input value={filter} onChange={(event) => setFilter(event.target.value)}></input>
     )
 }
 
